@@ -2,7 +2,7 @@ var Letter = function(strVal)  {
   this.strVal = strVal;
   this.isGuessed = false;
   this.showVal = function () {
-    return this.isGuessed ? strVal : "_";
+    return this.isGuessed ? this.strVal+' ' : "_ ";
   }
   this.getGuessed = function (userGuess) {
     if (!this.isGuessed) {
@@ -11,8 +11,8 @@ var Letter = function(strVal)  {
       // now it's been guessed, good or bad
       var isFound = false;
       for (let i = 0; i < curWordArr.length; i++) {
-          if (curWordArr[i] === userGuess) {          
-            builtWord[i] = userGuess;
+        if (curWordArr.charAt(i) === userGuess) {          
+           builtWord[i] = userGuess;
             isFound = true;
           };
       };

@@ -1,6 +1,6 @@
 var inquirer = require("inquirer");
 var Word = require("./word.js");
-var curWordArr, builtWord, arrGuessed
+var curWordArr, arrGuessed
 var userGuess,  curWord
 var wordArr = [
   {word: "unicorn"},{word: "griffin"},{word: "mermaid"},{word: "centaur"},
@@ -10,9 +10,11 @@ var cntWins = 0;
 var guessesLeft = 9;
 var cntLosses = 0;
 var curWordLen = 0;
+var letterObj = [];
+var builtWord = [];
 
 
-playGame();
+
 
 // read in a random word
 // initialize display
@@ -20,21 +22,22 @@ playGame();
 function playGame() {
   initGame();
   curWordArr.displayWord();
-  while (builtWord!==curWordArr && guessLeft>0){
-    inquirer.prompt([
-      {name: "letter",
-      message: "Type a letter" }])
-    .then(function(data){
-      var userGuess = new Letter(data.letter);
+  while (builtWord.toString()!==curWord && guessesLeft>0){
+    inquirer.prompt({
+      name: "letter",
+      message: "Type a letter\n" 
+    })
+    .then(function (data) {
+      var userGuess = data.letter;
       curWordArr.checkLetter(userGuess);
       //userGuess.getGuessed();
       // Already Guessed?
       // this sets builtWord and curCntGuess
 
       currWordArr.displayWord();
-    })
+    });
   } //.. end while
-  if (builtWord === curWordArr) {
+  if (builtWord.toString === curWord) {
       // increment cntWins
     cntWins++;
     console.log("\u001b[1;32m CORRECT: The word is "+curWord);
@@ -57,10 +60,12 @@ function initGame() {
     curWord = wordArr[curPtr].word;
     //curWordLen = curWord.length;
     curWordArr = new Word(curWord);
+    builtWord=[];
+    letterObj=[];
     curWordArr.buildWord();
     guessesLeft = 9;
     wasGuessed = [];
-    myWord = [];
+    // myWord = [];
     // read in a random word
     // initialize display
     // display a dummy array of the same length __ __ __ __ __
@@ -75,3 +80,4 @@ function showPlayData() {
   console.log("\u001b[1;34m WON:  " + cntWins);
   console.log("\u001b[1;34m LOST: " + cntLosses);
 }
+playGame()
