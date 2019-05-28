@@ -2,10 +2,15 @@ var inquirer = require("inquirer");
 var Word = require("./word.js");
 var curWordArr, builtWord, arrGuessed
 var userGuess,  curWord
-var guessesLeft = 9;
+var wordArr = [
+  {word: "unicorn"},{word: "griffin"},{word: "mermaid"},{word: "centaur"},
+  {word: "pegasus"},{word: "minotaur"},{word: "dragon"},{word: "phoenix"},
+  {word: "cerberus"},{word: "hippogryph"}];
 var cntWins = 0;
+var guessesLeft = 9;
 var cntLosses = 0;
-var curWordLen = 0
+var curWordLen = 0;
+
 
 playGame();
 
@@ -14,8 +19,8 @@ playGame();
 // display a dummy array of the same length __ __ __ __ __
 function playGame() {
   initGame();
-  currWordArr.displayWord();
-  while (builtWord!==curWordArr AND guessLeft>0){
+  curWordArr.displayWord();
+  while (builtWord!==curWordArr && guessLeft>0){
     inquirer.prompt([
       {name: "letter",
       message: "Type a letter" }])
@@ -29,7 +34,7 @@ function playGame() {
       currWordArr.displayWord();
     })
   } //.. end while
-  if (builtWord ==== curWordArr) {
+  if (builtWord === curWordArr) {
       // increment cntWins
     cntWins++;
     console.log("\u001b[1;32m CORRECT: The word is "+curWord);
@@ -39,87 +44,34 @@ function playGame() {
     cntLosses++;
     console.log("\u001b[1;31m SORRY: The word was " + curWord);
   }
-  showPlayData() 
+  showPlayData() ;
+  playGame();
 }
-
-function initGame() {
-  if (wordArr.length > 0) {
-    curPtr = getRandomPtr(wordArr.length);
-    curWord = wordArr[curPtr].word;
-    curWordLen = curWord.length;
-    curWordArr = new Word(curWordArr)
-    guessesLeft = 9;
-    wasGuessed=[];
-    myWord=[];
-  // read in a random word
-  // initialize display
-  // display a dummy array of the same length __ __ __ __ __
-  // remove that word from wordArr
-  } else {
-  //END OF GAME
-    console.log("\u001b[1;34m GAME OVER!");
-    console.log("\u001b[1;34m WON:  " + cntWins);
-    console.log("\u001b[1;34m LOST: " + cntLosses);
-    process.exit;
-  }
-}
-
 function getRandomPtr(max) {
   return Math.floor(Math.random() * Math.floor(max));
   // this will return 0 through max-1
 }
-
-
-
-var wordArr = [
-  {
-    word: "unicorn",
-    image: "assets/images/unicorn.jpg",
-    imgAlt: "Unicorn"
-  },
-  {
-    word: "griffin",
-    image: "assets/images/griffin.jpg",
-    imgAlt: "Griffin"
-  },
-  {
-    word: "mermaid",
-    image: "assets/images/mermaid.jpg",
-    imgAlt: "Mermaid"
-  },
-  {
-    word: "centaur",
-    image: "assets/images/centaur.jpg",
-    imgAlt: "Centaur"
-  },
-  {
-    word: "pegasus",
-    image: "assets/images/pegasus.jpg",
-    imgAlt: "Pegasus"
-  },
-  {
-    word: "minotaur",
-    image: "assets/images/minotaur.jpg",
-    imgAlt: "minotaur"
-  },
-  {
-    word: "dragon",
-    image: "assets/images/dragon.jpg",
-    imgAlt: "Dragon"
-  },
-  {
-    word: "phoenix",
-    image: "assets/images/phoenix.jpg",
-    imgAlt: "phoenix"
-  },
-  {
-    word: "cerberus",
-    image: "assets/images/cerberus.jpg",
-    imgAlt: "cerberus"
-  },
-  {
-    word: "hippogryph",
-    image: "assets/images/hippogryph.jpg",
-    imgAlt: "hippogryph"
+function initGame() {
+  if (wordArr.length > 0) {
+    curPtr = getRandomPtr(wordArr.length);
+    curWord = wordArr[curPtr].word;
+    //curWordLen = curWord.length;
+    curWordArr = new Word(curWord);
+    curWordArr.buildWord();
+    guessesLeft = 9;
+    wasGuessed = [];
+    myWord = [];
+    // read in a random word
+    // initialize display
+    // display a dummy array of the same length __ __ __ __ __
+    // remove that word from wordArr
+  } else {
+    //END OF GAME
+    console.log("\u001b[1;34m GAME OVER!");
+    process.exit;
   }
-];
+}
+function showPlayData() {
+  console.log("\u001b[1;34m WON:  " + cntWins);
+  console.log("\u001b[1;34m LOST: " + cntLosses);
+}

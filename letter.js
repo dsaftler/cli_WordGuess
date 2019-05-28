@@ -31,8 +31,8 @@ module.exports = Letter;
 // locate and display all the indexes that it occurs
 // the letter has been is NOT in the word
 
-var letter = new Letter('A',false);
-console.log(letter.showVal());
+// var letter = new Letter('A',false);
+// console.log(letter.showVal());
 // console.log("\u001b[1;32m Green message");
 // console.log("\u001b[1;31m Red message");
 // console.log("\u001b[1;34m Blue message");
