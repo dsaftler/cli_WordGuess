@@ -12,17 +12,18 @@ var cntLosses = 0;
 var curWordLen = 0;
 var letterObj = [];
 var builtWord = [];
-
-
-
-
+var nextGame = true;
 // read in a random word
 // initialize display
 // display a dummy array of the same length __ __ __ __ __
 function playGame() {
-  initGame();
+  if (nextGame) {
+    nextGame = false;
+    initGame();
+  }
   curWordArr.displayWord();
-  while (builtWord.toString()!==curWord && guessesLeft>0){
+  if (builtWord.toString()!==curWord && guessesLeft>0){
+   
     inquirer.prompt({
       name: "letter",
       message: "Type a letter\n" 
@@ -30,24 +31,28 @@ function playGame() {
     .then(function (data) {
       var userGuess = data.letter;
       curWordArr.checkLetter(userGuess);
+
       //userGuess.getGuessed();
       // Already Guessed?
       // this sets builtWord and curCntGuess
 
       currWordArr.displayWord();
     });
-  } //.. end while
+//  } //.. end while
+//builtWord.toString() !== curWord && 
   if (builtWord.toString === curWord) {
       // increment cntWins
     cntWins++;
     console.log("\u001b[1;32m CORRECT: The word is "+curWord);
+    nextGame = true;
     
-  }else {
+  } else if (guessesLeft > 0) {
     //  increment cntLosses
     cntLosses++;
     console.log("\u001b[1;31m SORRY: The word was " + curWord);
+    nextGame = true;
   }
-  showPlayData() ;
+  showPlayData();
   playGame();
 }
 function getRandomPtr(max) {

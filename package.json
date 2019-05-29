@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/dsaftler/cli_WordGuess/issues"
   },
-  "homepage": "https://github.com/dsaftler/cli_WordGuess#readme"
+  "homepage": "https://github.com/dsaftler/cli_WordGuess#readme",
+  "dependencies": {
+    "inquirer": "^6.3.1"
+  }
 }
