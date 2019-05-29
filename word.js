@@ -19,11 +19,17 @@ var Word = function (curWordArr) {
       //!ReferenceError: letter is not defined
       displayWord = displayWord + sayIt;
     }
-    console.log("\u001b[1;34m "+displayWord); 
+    return displayWord
   
   };
-  this.checkLetter = function (userGuess) {
-    letter.getGuessed(userGuess);
+  this.setLetterGuessed = function (userGuess) {
+    //letter.getGuessed(userGuess);
+    // find the letterObj and then call its getGuessed function
+    for (let n = 0; n < letterObj.length; n++) {
+      if (letterObj[n].strVal===userGuess){
+          letterObj[n].getGuessed();
+      }
+    }
   };
   this.hasAllLetters = function() {
     for (let m = 0; m < letterObj.length; m++) {
@@ -33,7 +39,7 @@ var Word = function (curWordArr) {
       }
     }
     return true;
-  };
+  }
 };
 
 module.exports = Word;

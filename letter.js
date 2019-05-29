@@ -1,4 +1,4 @@
-var Letter = function(strVal)  {
+function Letter(strVal)  {
   this.strVal = strVal;
   this.isGuessed = false;
   this.showVal = function () {
@@ -7,21 +7,6 @@ var Letter = function(strVal)  {
   this.getGuessed = function (userGuess) {
     if (!this.isGuessed) {
       this.isGuessed = true;
-      // now it's been guessed, good or bad
-      var isFound = false;
-      for (let i = 0; i < curWordArr.length; i++) {
-        if (curWordArr.charAt(i) === userGuess) {          
-          //  builtWord[i] = userGuess;
-            isFound = true;
-          };
-      };
-      if (!isFound) {
-     // increment curCntGuess
-        guessesLeft--;
-      }
-
-    } else {
-      console.log("\u001b[1;35m You already guessed "+userGuess);
     }
   }
 } 
