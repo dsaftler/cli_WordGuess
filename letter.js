@@ -6,13 +6,12 @@ var Letter = function(strVal)  {
   }
   this.getGuessed = function (userGuess) {
     if (!this.isGuessed) {
-      arrGuessed.push[i];
       this.isGuessed = true;
       // now it's been guessed, good or bad
       var isFound = false;
       for (let i = 0; i < curWordArr.length; i++) {
         if (curWordArr.charAt(i) === userGuess) {          
-           builtWord[i] = userGuess;
+          //  builtWord[i] = userGuess;
             isFound = true;
           };
       };
