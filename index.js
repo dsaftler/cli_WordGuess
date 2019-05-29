@@ -1,5 +1,5 @@
 var inquirer = require("inquirer");
-var readline = require('readline');
+// var readline = require('readline');
 
 var rl = readline.createInterface({
   input: process.stdin,
