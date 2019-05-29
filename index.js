@@ -1,10 +1,10 @@
 var inquirer = require("inquirer");
 // var readline = require('readline');
 
-var rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+// var rl = readline.createInterface({
+//   input: process.stdin,
+//   output: process.stdout
+// });
 var Word = require("./word.js");
 var curWordArr, allGuesses, displayWord,badGuesses
 var userGuess,  curWord
@@ -29,23 +29,21 @@ function playGame() {
     nextGame = false;
     initGame();
   }
-  //console.log("\u001b[1;34m " + curWordArr.displayWord()); 
- 
-  // if (builtWord.toString()!==curWord && guessesLeft>0){
+  inquirer.prompt({
+    name: "letter",
+    type: "input",
+    message: "Type a letter: "
+  })
+    .then(function (data) {
+     userGuess =  data.letter.toLowerCase();
+   //console.log("\u001b[1;34m " + curWordArr.displayWord()); 
+    // if (builtWord.toString()!==curWord && guessesLeft>0){
   // rl.question("Type a letter:  ", function (answer) {
   //     var userGuess = answer.toLowerCase();
   //      rl.close();
   // });   
-  // inquirer.prompt({
-  //   name: "letter",
-  //   type: "input",
-  //   message: "Type a letter: " 
-  // })
-  // .then(function (data) {
-    // var userGuess = data.letter.toLowerCase();
-
-    var userGuess = 'a';
-
+   
+    // var userGuess = 'a';
     alreadyGuessed = allGuesses.indexOf(userGuess) != -1
     if (!alreadyGuessed) {
       curWordArr.setLetterGuessed(userGuess);
@@ -90,8 +88,8 @@ function playGame() {
        //userGuess.getGuessed();
       // Already Guessed?
       // this sets builtWord and curCntGuess
-  // });     
-   playGame();
+  });     
+  playGame();
 }
 
 function getRandomPtr(max) {
