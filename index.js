@@ -29,21 +29,20 @@ function playGame() {
     nextGame = false;
     initGame();
   }
-  inquirer.prompt({
-    name: "letter",
-    type: "input",
-    message: "Type a letter: "
-  })
+  inquirer.prompt(
+    { name: "letter",
+      type: "input",
+      message: "Type a letter: "
+    })
     .then(function (data) {
-     userGuess =  data.letter.toLowerCase();
+     userGuess =  data.letter.substring(0,1).toLowerCase();
    //console.log("\u001b[1;34m " + curWordArr.displayWord()); 
     // if (builtWord.toString()!==curWord && guessesLeft>0){
   // rl.question("Type a letter:  ", function (answer) {
   //     var userGuess = answer.toLowerCase();
   //      rl.close();
   // });   
-   
-    // var userGuess = 'a';
+       // var userGuess = 'a';
     alreadyGuessed = allGuesses.indexOf(userGuess) != -1
     if (!alreadyGuessed) {
       curWordArr.setLetterGuessed(userGuess);
@@ -67,7 +66,7 @@ function playGame() {
     } else {
       console.log("\u001b[1;35m You already guessed " + userGuess);
     }
-    console.log(' '+curWordArr.displayWord()); 
+      console.log("\033[0;37m"+curWordArr.displayWord()); 
     if (badGuesses.length>0) {   
       console.log("\u001b[1;34m ...but NOT " + badGuesses+ '  You have '+guessesLeft+ ' guesses left')
     }
@@ -85,12 +84,13 @@ function playGame() {
       showPlayData();
       nextGame = true;
     }
+      playGame();
        //userGuess.getGuessed();
       // Already Guessed?
       // this sets builtWord and curCntGuess
   });     
-  playGame();
-}
+ // ;
+};
 
 function getRandomPtr(max) {
   return Math.floor(Math.random() * Math.floor(max));
